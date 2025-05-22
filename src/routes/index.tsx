@@ -1,37 +1,8 @@
-import { db, schema } from "../db";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
 import { Counter } from "../components/Counter";
-import { useState } from "react";
-
-const getCount = createServerFn({ method: "GET" }).handler(async () => {
-	const [result] = await db.select().from(schema.countTable).execute();
-	return result.value;
-});
-
-const incrementCount = createServerFn({ method: "POST" })
-	.validator((addBy: number) => addBy)
-	.handler(async ({ data }) => {
-		const [result] = await db.transaction(async (tx) => {
-			const [current] = await tx.select().from(schema.countTable).execute();
-			return await tx
-				.update(schema.countTable)
-				.set({ value: current.value + data })
-				.returning()
-				.execute();
-		});
-
-		return result.value;
-	});
-
-const subscribeEmail = createServerFn({ method: "POST" })
-	.validator((email: string) => email)
-	.handler(async ({ data }) => {
-		await db
-			.insert(schema.subscriptionsTable)
-			.values({ email: data })
-			.execute();
-	});
+import { useEffect, useState } from "react";
+import { useSetValueCallback } from "../components/StoreProvider";
+import { getCount, subscribeEmail } from "../actions";
 
 export const Route = createFileRoute("/")({
 	component: Home,
@@ -39,14 +10,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-	const router = useRouter();
 	const count = Route.useLoaderData();
 	const [email, setEmail] = useState("");
 	const [subscribed, setSubscribed] = useState(false);
 
-	const handleIncrement = async () => {
-		await incrementCount({ data: 1 }).then((res) => router.invalidate());
-	};
+	const setConfirmedCount = useSetValueCallback(
+		"confirmed",
+		(value: number) => value,
+	);
+
+	useEffect(() => {
+		setConfirmedCount(count);
+	}, [count, setConfirmedCount]);
 
 	const handleEmailSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -87,7 +62,7 @@ function Home() {
 				</p>
 				<p>Don't believe it? Go ahead and try!</p>
 				<div className="flex flex-col justify-center items-center gap-3">
-					<Counter count={count} onIncrement={handleIncrement} />
+					<Counter />
 				</div>
 			</div>
 			<div className="rounded-lg px-4 py-6 bg-slate-800 flex flex-col gap-5">

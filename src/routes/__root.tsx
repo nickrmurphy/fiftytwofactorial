@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "../app.css?url";
+import { StoreProvider } from "../components/StoreProvider";
+import { Syncronizer } from "../components/Syncronizer";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -46,8 +48,11 @@ export const Route = createRootRoute({
 function RootComponent() {
 	return (
 		<RootDocument>
-			<Outlet />
-			<TanStackRouterDevtools />
+			<StoreProvider>
+				<Outlet />
+				<TanStackRouterDevtools />
+				<Syncronizer />
+			</StoreProvider>
 		</RootDocument>
 	);
 }
