@@ -13,11 +13,11 @@
 } */
 
 @theme {
-  --font-sans: "Space Grotesk", sans-serif;
-  --font-mono: "Space Mono", monospace;
+	--font-sans: "Space Grotesk", sans-serif;
+	--font-mono: "Space Mono", monospace;
 }
 
 body {
-  background: var(--color-slate-950);
-  color: var(--color-slate-100);
+	background: var(--color-slate-950);
+	color: var(--color-slate-100);
 }

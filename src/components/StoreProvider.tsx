@@ -1,14 +1,14 @@
-import { createLocalPersister } from "tinybase/persisters/persister-browser/with-schemas";
-import { createStore, type NoTablesSchema } from "tinybase/with-schemas";
-import * as UiReact from "tinybase/ui-react/with-schemas";
+import { createLocalPersister } from 'tinybase/persisters/persister-browser/with-schemas';
+import * as UiReact from 'tinybase/ui-react/with-schemas';
+import { createStore, type NoTablesSchema } from 'tinybase/with-schemas';
 
 const storeSchema = {
 	pending: {
-		type: "number",
+		type: 'number',
 		default: 0,
 	},
 	confirmed: {
-		type: "number",
+		type: 'number',
 		default: 0,
 	},
 } as const;
@@ -26,7 +26,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 
 	useCreatePersister(
 		counterStore,
-		(counterStore) => createLocalPersister(counterStore, "counter"),
+		(counterStore) => createLocalPersister(counterStore, 'counter'),
 		[],
 		async (persister) => {
 			await persister.startAutoLoad();

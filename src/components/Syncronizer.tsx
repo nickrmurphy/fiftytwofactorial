@@ -1,7 +1,7 @@
-import { createManager } from "tinytick";
-import { useCallback, useEffect, useMemo } from "react";
-import { useStore } from "./StoreProvider";
-import { getCount, incrementCount } from "../actions";
+import { useCallback, useEffect, useMemo } from 'react';
+import { createManager } from 'tinytick';
+import { getCount, incrementCount } from '../actions';
+import { useStore } from './StoreProvider';
 
 export function Syncronizer() {
 	const manager = useMemo(() => createManager(), []);
@@ -11,15 +11,15 @@ export function Syncronizer() {
 		if (!store) return;
 
 		store.transaction(async () => {
-			const pending = store.getValue("pending");
+			const pending = store.getValue('pending');
 
 			if (pending > 0) {
 				const confirmedCount = await incrementCount({ data: pending });
-				store.setValue("confirmed", confirmedCount);
-				store.setValue("pending", store.getValue("pending") - pending);
+				store.setValue('confirmed', confirmedCount);
+				store.setValue('pending', store.getValue('pending') - pending);
 			} else {
 				const confirmedCount = await getCount();
-				store.setValue("confirmed", confirmedCount);
+				store.setValue('confirmed', confirmedCount);
 			}
 		});
 	}, [store]);
@@ -27,10 +27,10 @@ export function Syncronizer() {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <Run only on mount and unmount>
 	useEffect(() => {
 		manager.start();
-		manager.setTask("sync", syncTask, "", {
+		manager.setTask('sync', syncTask, '', {
 			repeatDelay: 2000,
 		});
-		manager.scheduleTaskRun("sync");
+		manager.scheduleTaskRun('sync');
 
 		return () => {
 			manager.stop();

@@ -1,13 +1,11 @@
-import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
-import * as schema from "./schema";
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
+import * as schema from './schema';
 
 const client = createClient({
-	// biome-ignore lint/style/noNonNullAssertion: <explanation>
-	url: process.env.TURSO_CONNECTION_URL!,
-	// biome-ignore lint/style/noNonNullAssertion: <explanation>
-	authToken: process.env.TURSO_AUTH_TOKEN!,
+	url: process.env.TURSO_CONNECTION_URL,
+	authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-export const db = drizzle(client, { casing: "snake_case" });
+export const db = drizzle(client, { casing: 'snake_case' });
 export { schema };

@@ -1,12 +1,12 @@
-import { db, schema } from "./db";
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn } from '@tanstack/react-start';
+import { db, schema } from './db';
 
-export const getCount = createServerFn({ method: "GET" }).handler(async () => {
+export const getCount = createServerFn({ method: 'GET' }).handler(async () => {
 	const [result] = await db.select().from(schema.countTable).execute();
 	return result.value;
 });
 
-export const incrementCount = createServerFn({ method: "POST" })
+export const incrementCount = createServerFn({ method: 'POST' })
 	.validator((addBy: number) => addBy)
 	.handler(async ({ data }) => {
 		const [result] = await db.transaction(async (tx) => {
@@ -21,7 +21,7 @@ export const incrementCount = createServerFn({ method: "POST" })
 		return result.value;
 	});
 
-export const subscribeEmail = createServerFn({ method: "POST" })
+export const subscribeEmail = createServerFn({ method: 'POST' })
 	.validator((email: string) => email)
 	.handler(async ({ data }) => {
 		await db

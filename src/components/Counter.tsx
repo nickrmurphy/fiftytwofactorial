@@ -1,4 +1,4 @@
-import { useSetValueCallback, useValues } from "./StoreProvider";
+import { useSetValueCallback, useValues } from './StoreProvider';
 
 const FIFTY_TWO_FACTORIAL =
 	80658175170900000000000000000000000000000000000000000000000000000000n;
@@ -10,8 +10,8 @@ const getPercent = (value: number) => {
 
 export function Counter() {
 	const { pending, confirmed } = useValues();
-	const incrementPending = useSetValueCallback("pending", (_, store) => {
-		return store.getValue("pending") + 1;
+	const incrementPending = useSetValueCallback('pending', (_, store) => {
+		return store.getValue('pending') + 1;
 	});
 
 	const totalCount = pending + confirmed;

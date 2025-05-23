@@ -1,21 +1,21 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { Counter } from "../components/Counter";
-import { useEffect, useState } from "react";
-import { useSetValueCallback } from "../components/StoreProvider";
-import { getCount, subscribeEmail } from "../actions";
+import { createFileRoute } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { getCount, subscribeEmail } from '../actions';
+import { Counter } from '../components/Counter';
+import { useSetValueCallback } from '../components/StoreProvider';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
 	component: Home,
 	loader: async () => await getCount(),
 });
 
 function Home() {
 	const count = Route.useLoaderData();
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState('');
 	const [subscribed, setSubscribed] = useState(false);
 
 	const setConfirmedCount = useSetValueCallback(
-		"confirmed",
+		'confirmed',
 		(value: number) => value,
 	);
 
@@ -26,7 +26,7 @@ function Home() {
 	const handleEmailSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		await subscribeEmail({ data: email }).then(() => {
-			setEmail("");
+			setEmail('');
 			setSubscribed(true);
 		});
 	};
