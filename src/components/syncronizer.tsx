@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { createManager } from 'tinytick';
 import { getCount, incrementCount } from '../actions';
-import { useStore } from './StoreProvider';
+import { useStore } from './store-provider';
 
 export function Syncronizer() {
 	const manager = useMemo(() => createManager(), []);

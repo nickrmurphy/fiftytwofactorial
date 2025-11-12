@@ -1,4 +1,4 @@
-import { useSetValueCallback, useValues } from './StoreProvider';
+import { useSetValueCallback, useValues } from './store-provider';
 
 const FIFTY_TWO_FACTORIAL =
 	80658175170900000000000000000000000000000000000000000000000000000000n;

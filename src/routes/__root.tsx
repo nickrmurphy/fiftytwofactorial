@@ -7,8 +7,8 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import type * as React from 'react';
 import appCss from '../app.css?url';
-import { StoreProvider } from '../components/StoreProvider';
-import { Syncronizer } from '../components/Syncronizer';
+import { StoreProvider } from '../components/store-provider';
+import { Syncronizer } from '../components/syncronizer';
 
 export const Route = createRootRoute({
 	head: () => ({
