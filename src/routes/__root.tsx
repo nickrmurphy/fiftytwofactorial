@@ -1,14 +1,10 @@
-import {
-	createRootRoute,
-	HeadContent,
-	Outlet,
-	Scripts,
-} from '@tanstack/react-router';
+/// <reference types="vite/client" />
+import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import type * as React from 'react';
-import appCss from '../app.css?url';
-import { StoreProvider } from '../components/store-provider';
-import { Syncronizer } from '../components/syncronizer';
+import { StoreProvider } from '~/components/store-provider';
+import { Syncronizer } from '~/components/syncronizer';
+import appCss from '~/styles/app.css?url';
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -26,6 +22,7 @@ export const Route = createRootRoute({
 		],
 		links: [
 			{ rel: 'stylesheet', href: appCss },
+			{ rel: 'manifest', href: '/site.webmanifest' },
 			{
 				rel: 'preconnect',
 				href: 'https://fonts.googleapis.com',
@@ -41,20 +38,8 @@ export const Route = createRootRoute({
 			},
 		],
 	}),
-	component: RootComponent,
+	shellComponent: RootDocument,
 });
-
-function RootComponent() {
-	return (
-		<RootDocument>
-			<StoreProvider>
-				<Outlet />
-				<TanStackRouterDevtools />
-				<Syncronizer />
-			</StoreProvider>
-		</RootDocument>
-	);
-}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
@@ -63,7 +48,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<StoreProvider>
+					{children}
+					<TanStackRouterDevtools />
+					<Syncronizer />
+				</StoreProvider>
 				<Scripts />
 			</body>
 		</html>

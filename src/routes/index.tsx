@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { getCount } from '../actions';
-import { Content } from '../components/content';
-import { Counter } from '../components/counter';
-import { EmailForm } from '../components/email-form';
-import { Hero } from '../components/hero';
-import { useSetValueCallback } from '../components/store-provider';
+import { getCount } from '~/actions';
+import { Content } from '~/components/content';
+import { Counter } from '~/components/counter';
+import { EmailForm } from '~/components/email-form';
+import { Hero } from '~/components/hero';
+import { useSetValueCallback } from '~/components/store-provider';
 
 export const Route = createFileRoute('/')({
 	component: Home,

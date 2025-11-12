@@ -6,7 +6,7 @@ export default defineConfig({
 	dialect: 'turso',
 	casing: 'snake_case',
 	dbCredentials: {
-		url: process.env.TURSO_CONNECTION_URL,
-		authToken: process.env.TURSO_AUTH_TOKEN,
+		url: process.env.TURSO_CONNECTION_URL!,
+		authToken: process.env.TURSO_AUTH_TOKEN!,
 	},
 });
