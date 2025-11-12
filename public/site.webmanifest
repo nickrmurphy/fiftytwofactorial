@@ -1,8 +1,8 @@
 {
-  "name": "Fifty-two Factorial",
-  "short_name": "52!",
-  "icons": [],
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "display": "standalone"
+	"name": "Fifty-two Factorial",
+	"short_name": "52!",
+	"icons": [],
+	"theme_color": "#000000",
+	"background_color": "#000000",
+	"display": "standalone"
 }
