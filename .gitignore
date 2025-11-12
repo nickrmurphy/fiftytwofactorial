@@ -22,3 +22,6 @@ dist
 
 count.txt
 local.db
+
+# Local Netlify folder
+.netlify
