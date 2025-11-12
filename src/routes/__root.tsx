@@ -4,7 +4,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import type * as React from 'react';
 import { StoreProvider } from '~/components/store-provider';
 import { Syncronizer } from '~/components/syncronizer';
-import '~/styles/app.css';
+import appCss from '~/styles/app.css?url';
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -21,6 +21,7 @@ export const Route = createRootRoute({
 			},
 		],
 		links: [
+			{ rel: 'stylesheet', href: appCss },
 			{ rel: 'manifest', href: '/site.webmanifest' },
 			{
 				rel: 'preconnect',
