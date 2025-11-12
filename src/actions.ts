@@ -7,7 +7,7 @@ export const getCount = createServerFn({ method: 'GET' }).handler(async () => {
 });
 
 export const incrementCount = createServerFn({ method: 'POST' })
-	.validator((addBy: number) => addBy)
+	.inputValidator((d: number) => d)
 	.handler(async ({ data }) => {
 		const [result] = await db.transaction(async (tx) => {
 			const [current] = await tx.select().from(schema.countTable).execute();
@@ -22,7 +22,7 @@ export const incrementCount = createServerFn({ method: 'POST' })
 	});
 
 export const subscribeEmail = createServerFn({ method: 'POST' })
-	.validator((email: string) => email)
+	.inputValidator((d: string) => d)
 	.handler(async ({ data }) => {
 		await db
 			.insert(schema.subscriptionsTable)

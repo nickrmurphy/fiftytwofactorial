@@ -1,36 +1,40 @@
 {
-	"name": "tanstack-start-example-counter",
-	"private": true,
-	"sideEffects": false,
-	"type": "module",
-	"scripts": {
-		"dev": "vinxi dev",
-		"build": "vinxi build",
-		"start": "vinxi start",
-		"format": "biome format --write .",
-		"lint": "biome lint ."
-	},
-	"dependencies": {
-		"@libsql/client": "^0.15.7",
-		"@tanstack/react-router": "^1.120.5",
-		"@tanstack/react-router-devtools": "^1.120.6",
-		"@tanstack/react-start": "^1.120.5",
-		"@types/bun": "^1.2.13",
-		"drizzle-orm": "^0.43.1",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"tinybase": "^6.1.1",
-		"tinytick": "^1.2.8",
-		"vinxi": "0.5.3"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.0.0-beta.5",
-		"@tailwindcss/vite": "^4.0.7",
-		"@types/node": "^22.5.4",
-		"@types/react": "^19.0.8",
-		"@types/react-dom": "^19.0.3",
-		"drizzle-kit": "^0.31.1",
-		"tailwindcss": "^4.0.7",
-		"typescript": "^5.7.2"
-	}
+  "name": "fiftytwofactorial",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && tsc --noEmit",
+    "start": "node .output/server/index.mjs",
+    "format": "biome format --write .",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@tanstack/react-router": "^1.135.2",
+    "@tanstack/react-router-devtools": "^1.135.2",
+    "@tanstack/react-start": "^1.135.2",
+    "drizzle-orm": "^0.44.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0",
+    "tinybase": "^6.7.2",
+    "tinytick": "^1.2.8",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.5",
+    "@tailwindcss/postcss": "^4.1.15",
+    "@types/node": "^22.5.4",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.6.0",
+    "drizzle-kit": "^0.31.6",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.1.15",
+    "typescript": "^5.7.2",
+    "vite": "^7.1.7",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
 }
