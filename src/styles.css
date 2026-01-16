@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource/space-mono";
+
+@theme inline {
+  --font-sans: "Space Grotesk Variable", sans-serif;
+  --font-mono: "Space Mono", monospace;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @apply bg-slate-950 text-slate-100;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
