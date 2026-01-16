@@ -1,6 +1,18 @@
-Welcome to your new TanStack app!
+# Fifty-Two Factorial
 
-# Getting Started
+A playful, interactive demonstration of just how unfathomably large 52! really is.
+
+**[Try it live at fiftytwofactorial.com](https://fiftytwofactorial.com)**
+
+## The Story
+
+This project was born from a friendly debate. I shared a fun fact with friends and family: there are so many possible ways to arrange a deck of cards (52 factorial, or 52!) that when you shuffle one, there's a good chance it has never been shuffled that same way before in all of human history.
+
+When they were skeptical about how large this number actually is, I tried explaining it with examples I found online—but even those were too abstract. So I decided to give them something tangible (or digital, at least): **a button**.
+
+Now they—and their friends, and whoever else they recruit—can mash away at the button, trying to reach 52 factorial. Spoiler alert: they never will.
+
+## Getting Started
 
 To run this application:
 
