@@ -8,6 +8,7 @@ interface Env {
 type ClientMessage = { type: "increment"; id: string };
 type ServerMessage =
   | { type: "count"; value: number; ackId?: string }
+  | { type: "presence"; value: number }
   | { type: "error"; error: string };
 
 export class Counter extends DurableObject<Env> {
@@ -26,7 +27,16 @@ export class Counter extends DurableObject<Env> {
 
     const { 0: client, 1: server } = new WebSocketPair();
     this.ctx.acceptWebSocket(server);
+
+    const sockets = this.ctx.getWebSockets();
+    const presence = sockets.length;
     this.send(server, { type: "count", value: this.readCount() });
+    this.send(server, { type: "presence", value: presence });
+
+    const presenceBroadcast = JSON.stringify({ type: "presence", value: presence });
+    for (const s of sockets) {
+      if (s !== server) s.send(presenceBroadcast);
+    }
 
     return new Response(null, { status: 101, webSocket: client });
   }
@@ -62,7 +72,18 @@ export class Counter extends DurableObject<Env> {
     _reason: string,
     _wasClean: boolean,
   ) {
+    this.broadcastPresenceExcept(ws);
     ws.close(code);
+  }
+
+  override webSocketError(ws: WebSocket, _error: unknown) {
+    this.broadcastPresenceExcept(ws);
+  }
+
+  private broadcastPresenceExcept(ws: WebSocket) {
+    const remaining = this.ctx.getWebSockets().filter((s) => s !== ws);
+    const broadcast = JSON.stringify({ type: "presence", value: remaining.length });
+    for (const s of remaining) s.send(broadcast);
   }
 }
 

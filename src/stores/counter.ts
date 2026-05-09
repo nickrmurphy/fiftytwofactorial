@@ -2,6 +2,7 @@ import { atom, computed, onMount } from "nanostores";
 
 type ServerMessage =
   | { type: "count"; value: number; ackId?: string }
+  | { type: "presence"; value: number }
   | { type: "error"; error: string };
 
 const RECONNECT_DELAYS = [500, 1000, 2000, 5000];
@@ -13,6 +14,7 @@ export const $count = computed(
   (remote, pending) => remote + pending.size,
 );
 export const $connected = atom(false);
+export const $presence = atom(0);
 
 let socket: WebSocket | null = null;
 
@@ -62,6 +64,8 @@ onMount($count, () => {
             $pendingIds.set(updated);
           }
         }
+      } else if (msg.type === "presence") {
+        $presence.set(msg.value);
       } else if (msg.type === "error") {
         console.warn("counter ws error:", msg.error);
       }
@@ -71,6 +75,7 @@ onMount($count, () => {
       if (socket === ws) socket = null;
       $connected.set(false);
       $pendingIds.set(new Set());
+      $presence.set(0);
       if (stopped) return;
       const delay =
         RECONNECT_DELAYS[Math.min(attempt, RECONNECT_DELAYS.length - 1)];

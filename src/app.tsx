@@ -39,11 +39,15 @@ export function App() {
 }
 
 function Counter() {
-  const { count, increment, connected } = useCounter();
+  const { count, presence, increment, connected } = useCounter();
 
   return (
     <div className="fixed bottom-4 inset-x-4 lg:inset-x-[calc(50%-28rem)] bg-slate-900/80 border space-y-3 border-slate-200/10 backdrop-blur-lg rounded-2xl p-2.5">
-      <Progress count={BigInt(count)} total={FIFTY_TWO_FACTORIAL} />
+      <Progress
+        count={BigInt(count)}
+        total={FIFTY_TWO_FACTORIAL}
+        presence={connected ? presence : undefined}
+      />
       <div className="flex justify-between">
         <div className="flex items-center justify-center pl-2">
           <Count count={count} />
