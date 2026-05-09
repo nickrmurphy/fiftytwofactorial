@@ -12,6 +12,8 @@ When they were skeptical about how large this number actually is, I tried explai
 
 Now they—and their friends, and whoever else they recruit—can mash away at the button, trying to reach 52 factorial. Spoiler alert: they never will.
 
+Every press is broadcast over a WebSocket connection, so the count updates live for everyone watching at the same time. Recruit a few friends, open the page side by side, and you'll see each other's clicks land in real time—a small reminder that even an entire team mashing in unison still isn't going to make a dent.
+
 ## Getting Started
 
 To run this application:

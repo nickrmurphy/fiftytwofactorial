@@ -1,5 +1,3 @@
-import { getCount } from "@/data/count";
-import { createFileRoute } from "@tanstack/react-router";
 import { useCounter } from "@/hooks/use-counter";
 import { Button } from "@/components/button";
 import { Count } from "@/components/count";
@@ -22,9 +20,7 @@ const TRAILING_PARAGRAPHS: string[] = [
   "Don't believe it? Go ahead and try!",
 ];
 
-export const Route = createFileRoute("/")({ component: App, loader: () => getCount() });
-
-function App() {
+export function App() {
   return (
     <main className="mb-36 max-w-5xl mx-auto">
       <Title>Shuffle a deck. Make history.</Title>
@@ -43,8 +39,7 @@ function App() {
 }
 
 function Counter() {
-  const { count: initialCount } = Route.useLoaderData();
-  const { count, increment } = useCounter(initialCount);
+  const { count, increment, connected } = useCounter();
 
   return (
     <div className="fixed bottom-4 inset-x-4 lg:inset-x-[calc(50%-28rem)] bg-slate-900/80 border space-y-3 border-slate-200/10 backdrop-blur-lg rounded-2xl p-2.5">
@@ -54,7 +49,9 @@ function Counter() {
           <Count count={count} />
         </div>
         <div className="flex justify-center">
-          <Button onClick={increment}>Click me</Button>
+          <Button onClick={increment} disabled={!connected}>
+            Click me
+          </Button>
         </div>
       </div>
     </div>
